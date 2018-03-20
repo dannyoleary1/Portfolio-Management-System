@@ -1,2 +1,2 @@
 // public/js/app.js
-angular.module('portfolio-management-system', ['ngRoute', 'appRoutes', 'MainCtrl', 'NerdCtrl', 'NerdService']);
+var app = angular.module('app', ['ngRoute', 'appRoutes', 'MainCtrl', 'NerdCtrl', 'NerdService', 'JSONModelService']);
