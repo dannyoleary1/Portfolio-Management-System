@@ -34,6 +34,37 @@ module.exports = function(app) {
         });
     });
 
+    app.delete('/api/stocks', function (req, res) {
+        Stock.remove(function (err, stocks) {
+            if (err)
+                res.send(err);
+            res.json("Deleted!")
+        });
+    });
+
+    app.post('/api/stocks', function(req, res){
+        var stock = new Stock();
+        stock.description = req.body.description
+        stock.location = req.body.location
+        stock.symbol = req.body.symbol
+        stock.dateIn = req.body.dateIn
+        stock.quantity = req.body.quantity
+        stock.cost = req.body.cost
+        stock.dateOut = req.body.dateOut
+        stock.purchasePrice = req.body.purchasePrice
+        stock.price = req.body.price
+        stock.value = req.body.value
+        stock.gainOrLost = req.body.gainOrLost
+        stock.percentGainOrLost = req.body.percentGainOrLost
+        stock.sellCosts = req.body.sellCosts
+
+        stock.save(function (err) {
+            if (err)
+                res.send(err);
+            res.json({message: 'Stock Created!'});
+        });
+    });
+
     // route to handle creating goes here (app.post)
     // route to handle delete goes here (app.delete)
 

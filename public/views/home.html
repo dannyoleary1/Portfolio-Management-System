@@ -19,21 +19,21 @@
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat="value in allStocks.stocks">
+        <tr ng-repeat="value in allStocks">
             <td>{{value.description}}</td>
             <td>{{value.location}}</td>
             <td>{{value.symbol}}</td>
-            <td>{{value.date_in}}</td>
-            <td>{{value.date_out}}</td>
-            <td>{{value.qty}}</td>
+            <td>{{value.dateIn}}</td>
+            <td>{{value.dateOut}}</td>
+            <td>{{value.quantity}}</td>
             <td></td>
             <td>{{value.cost}}</td>
-            <td>{{value.purchase_price}}</td>
+            <td>{{value.purchasePrice}}</td>
             <td>{{value.price}}</td>
             <td>{{value.value}}</td>
-            <td>{{value["gain/lost"]}}</td>
-            <td>{{value["%gain/lost"]}}</td>
-            <td>{{value.sell_costs}}</td>
+            <td>{{value.gainOrLost}}</td>
+            <td>{{value.percentGainOrLost}}</td>
+            <td>{{value.sellCosts}}</td>
         </tr>
     </tbody>
 </table>

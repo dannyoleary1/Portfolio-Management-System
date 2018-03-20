@@ -21,6 +21,7 @@ mongoose.connect(url);
 
 // get all data/stuff of the body (POST) parameters
 // parse application/json
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // parse application/vnd.api+json as json

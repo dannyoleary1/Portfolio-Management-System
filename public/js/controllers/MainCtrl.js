@@ -1,5 +1,13 @@
-angular.module('MainCtrl', []).controller('MainController', function($scope, JSONModel) {
+angular.module('MainCtrl', []).controller('MainController', function($scope, JSONModel, REST) {
 
     $scope.tagline = 'To the moon and back!';
-    $scope.allStocks = JSONModel.get();
+    // var test = JSONModel.get()
+    // test.stocks.forEach(function (value) {
+    //     REST.create('/api/stocks', value)
+    // })
+
+
+     REST.get('/api/stocks').then(function(data){
+         $scope.allStocks = data;
+     });
 });

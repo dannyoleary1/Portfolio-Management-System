@@ -8,7 +8,14 @@ module.exports = mongoose.model('Stock', {
     description : {type : String, default: ''},
     location : {type: String, default: ''},
     symbol : {type: String, default: ''},
-    dateIn: {type: Date, default: Date.now}, //TODO change to date.
+    dateIn: {type: String, default: ""}, //TODO change to date.
     quantity: {type: Number, default: 0},
-    cost: {type: Number, default: 0}
+    cost: {type: Number, default: 0.00},
+    dateOut: {type: String, default: ""},
+    purchasePrice: {type: Number, default: 0.00},
+    price: {type: Number, default: 0.00},
+    value: {type: Number, default: 0.00},
+    gainOrLost: {type: Number, default: 0.00},
+    percentGainOrLost: {type: Number, default: 0.00},
+    sellCosts: {type: Number, default: 0.00}
 });
