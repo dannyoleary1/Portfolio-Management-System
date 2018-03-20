@@ -2,6 +2,7 @@
 
 // grab the nerd model we just created
 var Nerd = require('./models/nerd');
+var Stock = require('./models/stock');
 
 module.exports = function(app) {
 
@@ -20,6 +21,16 @@ module.exports = function(app) {
                 res.send(err);
 
             res.json(nerds); // return all nerds in JSON format
+        });
+    });
+
+    app.get('/api/stocks', function(req, res){
+        //use mongoose to get all stocks in the database
+        Stock.find(function(err, stocks){
+            if (err)
+                res.send(err);
+
+            res.json(stocks);
         });
     });
 
