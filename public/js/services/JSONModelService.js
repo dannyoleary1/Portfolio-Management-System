@@ -9,7 +9,15 @@ angular.module('JSONModelService', []).factory('JSONModel', function() {
                 "symbol": "AIBG_I",
                 "date_in": "01/01/2018",
                 "qty": 1000,
-                "cost": 5000.00
+                "cost": 5000.00,
+                "date_out": "",
+                "purchase_price": 0.00,
+                "price": 0.00,
+                "value": 0.00,
+                "gain/lost": 0.00,
+                "%gain/lost": 0.00,
+                "sell_costs": 0.00,
+
             },
             {
                 "description": "Bank Of Ireland",
@@ -17,7 +25,14 @@ angular.module('JSONModelService', []).factory('JSONModel', function() {
                 "symbol": "BIRG_I",
                 "date_in": "01/01/2012",
                 "qty": 1000,
-                "cost": 4000.00
+                "cost": 4000.00,
+                "date_out": "",
+                "purchase_price": 0.00,
+                "price": 0.00,
+                "value": 0.00,
+                "gain/lost": 0.00,
+                "%gain/lost": 0.00,
+                "sell_costs": 0.00
             },
             {
                 "description": "Bank Of Ireland",
@@ -25,7 +40,14 @@ angular.module('JSONModelService', []).factory('JSONModel', function() {
                 "symbol": "BIRG_I",
                 "date_in": "01/01/2013",
                 "qty": 2000,
-                "cost": 7000.00
+                "cost": 7000.00,
+                "date_out": "",
+                "purchase_price": 0.00,
+                "price": 0.00,
+                "value": 0.00,
+                "gain/lost": 0.00,
+                "%gain/lost": 0.00,
+                "sell_costs": 0.00
             },
             {
                 "description": "Bank Of Ireland",
@@ -33,7 +55,14 @@ angular.module('JSONModelService', []).factory('JSONModel', function() {
                 "symbol": "BIRG_I",
                 "date_in": "01/01/2014",
                 "qty": 3000,
-                "cost": 9000.00
+                "cost": 9000.00,
+                "date_out": "",
+                "purchase_price": 0.00,
+                "price": 0.00,
+                "value": 0.00,
+                "gain/lost": 0.00,
+                "%gain/lost": 0.00,
+                "sell_costs": 0.00
             },
             {
                 "description": "Bank Of Ireland",
@@ -41,7 +70,14 @@ angular.module('JSONModelService', []).factory('JSONModel', function() {
                 "symbol": "BIRG_I",
                 "date_in": "01/01/2015",
                 "qty": 1000,
-                "cost": 3500.00
+                "cost": 3500.00,
+                "date_out": "",
+                "purchase_price": 0.00,
+                "price": 0.00,
+                "value": 0.00,
+                "gain/lost": 0.00,
+                "%gain/lost": 0.00,
+                "sell_costs": 0.00
             },
             {
                 "description": "Bank Of Ireland",
@@ -49,7 +85,14 @@ angular.module('JSONModelService', []).factory('JSONModel', function() {
                 "symbol": "BIRG_I",
                 "date_in": "01/01/2016",
                 "qty": 2000,
-                "cost": 7000.00
+                "cost": 7000.00,
+                "date_out": "",
+                "purchase_price": 0.00,
+                "price": 0.00,
+                "value": 0.00,
+                "gain/lost": 0.00,
+                "%gain/lost": 0.00,
+                "sell_costs": 0.00
             },
             {
                 "description": "Bank Of Ireland",
@@ -57,7 +100,14 @@ angular.module('JSONModelService', []).factory('JSONModel', function() {
                 "symbol": "BIRG_I",
                 "date_in": "01/01/2017",
                 "qty": 3000,
-                "cost": 12000.00
+                "cost": 12000.00,
+                "date_out": "",
+                "purchase_price": 0.00,
+                "price": 0.00,
+                "value": 0.00,
+                "gain/lost": 0.00,
+                "%gain/lost": 0.00,
+                "sell_costs": 0.00
             },
             {
                 "description": "Bank Of Ireland",
@@ -65,7 +115,14 @@ angular.module('JSONModelService', []).factory('JSONModel', function() {
                 "symbol": "BIRG_I",
                 "date_in": "01/01/2018",
                 "qty": 4000,
-                "cost": 22000.00
+                "cost": 22000.00,
+                "date_out": "",
+                "purchase_price": 0.00,
+                "price": 0.00,
+                "value": 0.00,
+                "gain/lost": 0.00,
+                "%gain/lost": 0.00,
+                "sell_costs": 0.00
             },
             {
                 "description": "CRH",
@@ -73,7 +130,14 @@ angular.module('JSONModelService', []).factory('JSONModel', function() {
                 "symbol": "CRH_I",
                 "date_in": "01/01/2014",
                 "qty": 3000,
-                "cost": 60000.00
+                "cost": 60000.00,
+                "date_out": "",
+                "purchase_price": 0.00,
+                "price": 0.00,
+                "value": 0.00,
+                "gain/lost": 0.00,
+                "%gain/lost": 0.00,
+                "sell_costs": 0.00
             },
             {
                 "description": "CRH",
@@ -81,7 +145,14 @@ angular.module('JSONModelService', []).factory('JSONModel', function() {
                 "symbol": "CRH_I",
                 "date_in": "01/01/2015",
                 "qty": 1000,
-                "cost": 25000.00
+                "cost": 25000.00,
+                "date_out": "",
+                "purchase_price": 0.00,
+                "price": 0.00,
+                "value": 0.00,
+                "gain/lost": 0.00,
+                "%gain/lost": 0.00,
+                "sell_costs": 0.00
             },
             {
                 "description": "CRH",
@@ -89,7 +160,14 @@ angular.module('JSONModelService', []).factory('JSONModel', function() {
                 "symbol": "CRH_I",
                 "date_in": "01/01/2016",
                 "qty": 2000,
-                "cost": 60000.00
+                "cost": 60000.00,
+                "date_out": "",
+                "purchase_price": 0.00,
+                "price": 0.00,
+                "value": 0.00,
+                "gain/lost": 0.00,
+                "%gain/lost": 0.00,
+                "sell_costs": 0.00
             },
             {
                 "description": "Tesco",
@@ -97,7 +175,14 @@ angular.module('JSONModelService', []).factory('JSONModel', function() {
                 "symbol": "TSCO",
                 "date_in": "01/01/2014",
                 "qty": 4000,
-                "cost": 12000.00
+                "cost": 12000.00,
+                "date_out": "",
+                "purchase_price": 0.00,
+                "price": 0.00,
+                "value": 0.00,
+                "gain/lost": 0.00,
+                "%gain/lost": 0.00,
+                "sell_costs": 0.00
             },
             {
                 "description": "Tesco",
@@ -105,7 +190,14 @@ angular.module('JSONModelService', []).factory('JSONModel', function() {
                 "symbol": "TSCO",
                 "date_in": "01/01/2015",
                 "qty": 8000,
-                "cost": 20000.00
+                "cost": 20000.00,
+                "date_out": "",
+                "purchase_price": 0.00,
+                "price": 0.00,
+                "value": 0.00,
+                "gain/lost": 0.00,
+                "%gain/lost": 0.00,
+                "sell_costs": 0.00
             },
             {
                 "description": "Tesco",
@@ -113,7 +205,14 @@ angular.module('JSONModelService', []).factory('JSONModel', function() {
                 "symbol": "TSCO",
                 "date_in": "01/01/2016",
                 "qty": 2000,
-                "cost": 9000.00
+                "cost": 9000.00,
+                "date_out": "",
+                "purchase_price": 0.00,
+                "price": 0.00,
+                "value": 0.00,
+                "gain/lost": 0.00,
+                "%gain/lost": 0.00,
+                "sell_costs": 0.00
             },
             {
                 "description": "Ripple",
@@ -121,7 +220,14 @@ angular.module('JSONModelService', []).factory('JSONModel', function() {
                 "symbol": "ripple-xrp",
                 "date_in": "01/01/2016",
                 "qty": 3000,
-                "cost": 6000.00
+                "cost": 6000.00,
+                "date_out": "",
+                "purchase_price": 0.00,
+                "price": 0.00,
+                "value": 0.00,
+                "gain/lost": 0.00,
+                "%gain/lost": 0.00,
+                "sell_costs": 0.00
             },
             {
                 "description": "Ripple",
@@ -129,7 +235,14 @@ angular.module('JSONModelService', []).factory('JSONModel', function() {
                 "symbol": "ripple-xrp",
                 "date_in": "01/01/2017",
                 "qty": 1000,
-                "cost": 2500.00
+                "cost": 2500.00,
+                "date_out": "",
+                "purchase_price": 0.00,
+                "price": 0.00,
+                "value": 0.00,
+                "gain/lost": 0.00,
+                "%gain/lost": 0.00,
+                "sell_costs": 0.00
             },
             {
                 "description": "Ripple",
@@ -137,7 +250,14 @@ angular.module('JSONModelService', []).factory('JSONModel', function() {
                 "symbol": "ripple-xrp",
                 "date_in": "01/01/2018",
                 "qty": 2000,
-                "cost": 6000.00
+                "cost": 6000.00,
+                "date_out": "",
+                "purchase_price": 0.00,
+                "price": 0.00,
+                "value": 0.00,
+                "gain/lost": 0.00,
+                "%gain/lost": 0.00,
+                "sell_costs": 0.00
             }
         ]
     }

@@ -1,12 +1,21 @@
-<table id="stock-table" class="table">
+<table id="stock-table" class="table table-sm">
     <thead id="stock-table-header" class="thead-dark">
         <tr>
             <th id="stock-description">Description</th>
             <th id="stock-location">Location</th>
             <th id="stock-symbol">Symbol</th>
             <th id="stock-date-in">Date Bought</th>
+            <th id="stock-date-out">Date Out</th>
             <th id="stock-quantity">Quantity</th>
+            <th id="stock-total">Total Quantity</th>
             <th id="stock-cost">Cost</th>
+            <th id="stock-purchase-price">Purchase Price</th>
+            <th id="stock-price">Price</th>
+            <th id="stock-value">Value</th>
+            <th id="stock-gain-or-loss">Gain/Loss</th>
+            <th id="stock-total-gain-or-loss">Cumulative Gain/Loss</th>
+            <th id="stock-percent-gain-loss">% Gain/Loss</th>
+            <th id="stock-sell-cost">Sell Costs</th>
         </tr>
     </thead>
     <tbody>
@@ -15,8 +24,16 @@
             <td>{{value.location}}</td>
             <td>{{value.symbol}}</td>
             <td>{{value.date_in}}</td>
+            <td>{{value.date_out}}</td>
             <td>{{value.qty}}</td>
+            <td></td>
             <td>{{value.cost}}</td>
+            <td>{{value.purchase_price}}</td>
+            <td>{{value.price}}</td>
+            <td>{{value.value}}</td>
+            <td>{{value["gain/lost"]}}</td>
+            <td>{{value["%gain/lost"]}}</td>
+            <td>{{value.sell_costs}}</td>
         </tr>
     </tbody>
 </table>
