@@ -1,5 +1,22 @@
-<div class="jumbotron text-center">
-    <h1>Home Page 4 Life</h1>
-
-    <p>{{ allStocks }}</p>
-</div>
+<table id="stock-table" class="table">
+    <thead id="stock-table-header" class="thead-dark">
+        <tr>
+            <th id="stock-description">Description</th>
+            <th id="stock-location">Location</th>
+            <th id="stock-symbol">Symbol</th>
+            <th id="stock-date-in">Date Bought</th>
+            <th id="stock-quantity">Quantity</th>
+            <th id="stock-cost">Cost</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="value in allStocks.stocks">
+            <td>{{value.description}}</td>
+            <td>{{value.location}}</td>
+            <td>{{value.symbol}}</td>
+            <td>{{value.date_in}}</td>
+            <td>{{value.qty}}</td>
+            <td>{{value.cost}}</td>
+        </tr>
+    </tbody>
+</table>
