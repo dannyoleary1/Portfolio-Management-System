@@ -3,7 +3,6 @@ angular.module('RESTService', []).factory('REST', ['$http', function($http) {
         get : function(url){
             return $http.get(url).then(function(response) {
                 //return data when promise resolved
-                //that would help you to continue promise chain.
                 return response.data;
             });
         },

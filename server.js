@@ -10,7 +10,7 @@ var methodOverride = require('method-override');
 // configuration ===========================================
 
 // config files
-//var db = require('./config/mongodb');
+// var db = require('./config/mongodb');
 var url = process.env.MONGOLAB_URI;
 
 // set our port
