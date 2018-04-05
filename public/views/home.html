@@ -1,3 +1,16 @@
+<div class="row">
+    <div class="col">
+
+    </div>
+    <div class="col">
+
+    </div>
+    <div class="col">
+        <h5>Select Test Case:   </h5>
+        <select ng-model="currentCase" ng-options="x for x in testCase" ng-change="updateTableData()"></select>
+    </div>
+</div>
+
 <table id="stock-table" class="table table-sm">
     <thead id="stock-table-header" class="thead-dark">
         <tr>
@@ -31,8 +44,11 @@
             <td>{{value.purchasePrice}}</td>
             <td>{{value.price}}</td>
             <td>{{value.value}}</td>
-            <td>{{value.gainOrLost}}</td>
-            <td>{{value.percentGainOrLost}}</td>
+            <td ng-if="value.gainOrLost < 0" class="text-danger">{{value.gainOrLost}}</td>
+            <td ng-if="value.gainOrLost > 0" class="text-success">{{value.gainOrLost}}</td>
+            <td></td>
+            <td ng-if="value.gainOrLost < 0" class="text-danger">{{value.percentGainOrLost}}</td>
+            <td ng-if="value.gainOrLost > 0" class="text-success">{{value.percentGainOrLost}}</td>
             <td>{{value.sellCosts}}</td>
         </tr>
     </tbody>
