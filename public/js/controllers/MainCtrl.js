@@ -7,7 +7,7 @@ angular.module('MainCtrl', []).controller('MainController', function($scope,$q, 
 
     $scope.testCase = [0,1,2,3,4,5];
 
-    $scope.currentCase = 1;
+    $scope.currentCase = 0;
 
     $q.all([
         REST.get('/api/stocks'),
@@ -74,12 +74,10 @@ angular.module('MainCtrl', []).controller('MainController', function($scope,$q, 
             REST.get('/api/stocks'),
             REST.get('https://scraper601.herokuapp.com/scrape/test?n='+$scope.currentCase)
         ]).then(function(data) {
-
-            console.log($scope.currentCase);
-
             $scope.allStocks = data[0];
             $scope.testInfo = data[1];
             $scope.allStocks.sort(function(a,b){
+                    console.log(desA)
                     var desA = a.description.toLowerCase()
                     var desB = b.description.toLowerCase()
                     if (desA < desB) //sort string ascending
