@@ -1,5 +1,4 @@
 angular.module('JSONModelService', []).factory('JSONModel', function() {
-
     var stocks = {
         "stocks":
         [

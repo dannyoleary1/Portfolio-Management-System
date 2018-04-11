@@ -2,10 +2,12 @@
   "name": "portfolio-management-system",
   "version": "1.0.0",
   "dependencies": {
-    "bootstrap": "4.0.0",
+    "jquery": "^3.3.1",
+    "bootstrap": "^4.0.0",
     "font-awesome": "5.0.8",
     "animate.css": "3.5.2",
     "angular": "1.6.9",
-    "angular-route": "1.6.9"
+    "angular-route": "1.6.9",
+    "popper.js": "^1.14.3"
   }
 }

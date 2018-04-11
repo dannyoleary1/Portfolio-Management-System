@@ -36,6 +36,7 @@ module.exports = function(app) {
 
     app.delete('/api/stocks', function (req, res) {
         Stock.remove(function (err, stocks) {
+            console.log(stocks)
             if (err)
                 res.send(err);
             res.json("Deleted!")

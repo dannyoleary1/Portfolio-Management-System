@@ -1,6 +1,6 @@
 angular.module('MainUtilService', []).factory('MainUtil', function() {
     function getPurchasePrice(data){
-        return data.cost/data.quantity
+        return (data.cost/data.quantity).toFixed(2)
     }
     function getSellCostValue(value){
         if (value < 25000){
@@ -36,9 +36,6 @@ angular.module('MainUtilService', []).factory('MainUtil', function() {
                     currencyData.price = queryData.ise.data[2].price
                     assignValuesToEntry(currencyData)
                 }
-                //0,1,2 in an array depends on what type of stock. 0 is AIBG_I. 1 is BIRG_I, 2 is CRH_I
-
-                //step two. Get price now.
             }
             else if (currencyData.location == 'ftse'){
                 currencyData.price = queryData.ftse350.data[0].price

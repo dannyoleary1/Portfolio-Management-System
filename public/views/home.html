@@ -1,16 +1,45 @@
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Stock</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    Description: <select ng-model="description" ng-options="x for x in descriptionSelectBox"></select><br>
+                    <br>
+                    Quantity: <input ng-model="quantity"></input><br>
+                    <br>
+                    Price: <input ng-model="price"></input>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                <button ng-click="addEntry()" type="button" class="btn btn-primary" data-dismiss="modal">Add Stock</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <div class="row">
     <div class="col">
-
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">
+            <i class="fas fa-plus"></i> Add User
+        </button>
     </div>
     <div class="col">
-
+        <button ng-click="resetData()" type="button" class="btn btn-primary">Reset Data</button>
     </div>
     <div class="col">
         <h5>Select Test Case:   </h5>
         <select ng-model="currentCase" ng-options="x for x in testCase" ng-change="updateTableData()"></select>
     </div>
 </div>
-
 <table id="stock-table" class="table table-sm">
     <thead id="stock-table-header" class="thead-dark">
         <tr>
@@ -53,3 +82,5 @@
         </tr>
     </tbody>
 </table>
+
+
