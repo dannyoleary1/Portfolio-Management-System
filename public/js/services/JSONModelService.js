@@ -16,7 +16,6 @@ angular.module('JSONModelService', []).factory('JSONModel', function() {
                 "gainOrLost": 0.00,
                 "percentGainOrlost": 0.00,
                 "sellCosts": 0.00,
-
             },
             {
                 "description": "Bank Of Ireland",

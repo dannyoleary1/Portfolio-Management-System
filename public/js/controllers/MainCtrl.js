@@ -56,8 +56,27 @@ angular.module('MainCtrl', []).controller('MainController', function($scope,$q, 
                     return 0 //default return value (no sorting)
                 }
             );
+            var prevEntry = ""
+            var total = 0
+            var i = 0
             $scope.allStocks.forEach(function (entry) {
+                if (entry.description==prevEntry){
+                    total = total + entry.quantity
+                    if (i==$scope.allStocks.length-1){
+                        console.log(prevEntry)
+                        console.log(total)
+                    }
+                }
+                else if (entry.description!=prevEntry) {
+                    console.log(prevEntry)
+                    console.log(total)
+                    //New Entry.
+                    total = 0
+                    total = total + entry.quantity
+                    prevEntry = entry.description
+                }
                 MainUtil.setUpData(entry, $scope.testInfo)
+                i++
             })
         });
     }
