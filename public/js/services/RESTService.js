@@ -13,6 +13,10 @@ angular.module('RESTService', []).factory('REST', ['$http', function($http) {
 
         delete : function (url){
             return $http.delete(url)
+        },
+
+        deleteOne: function (url,id) {
+            return $http.delete(url+id)
         }
     }
 }])

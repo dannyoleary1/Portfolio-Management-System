@@ -56,29 +56,35 @@ angular.module('MainCtrl', []).controller('MainController', function($scope,$q, 
                     return 0 //default return value (no sorting)
                 }
             );
-            var prevEntry = ""
+            var prevDes = ""
+            var prevEntry
             var total = 0
             var i = 0
             $scope.allStocks.forEach(function (entry) {
-                if (entry.description==prevEntry){
+                if (entry.description==prevDes){
                     total = total + entry.quantity
+                    prevEntry = entry
                     if (i==$scope.allStocks.length-1){
-                        console.log(prevEntry)
-                        console.log(total)
+                        prevEntry.total = total
                     }
                 }
-                else if (entry.description!=prevEntry) {
-                    console.log(prevEntry)
+                else if (entry.description!=prevDes) {
+                    console.log(prevDes)
                     console.log(total)
+                    if (prevEntry!=undefined) {
+                        prevEntry.total = total
+                    }
                     //New Entry.
                     total = 0
                     total = total + entry.quantity
-                    prevEntry = entry.description
+                    prevDes = entry.description
+                    prevEntry = entry
                 }
                 MainUtil.setUpData(entry, $scope.testInfo)
                 i++
             })
         });
+        REST.deleteOne("/api/stocks/",1)
     }
     
     $scope.addEntry = function () {

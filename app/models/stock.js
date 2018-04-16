@@ -17,5 +17,6 @@ module.exports = mongoose.model('Stock', {
     value: {type: Number, default: 0.00},
     gainOrLost: {type: Number, default: 0.00},
     percentGainOrLost: {type: Number, default: 0.00},
-    sellCosts: {type: Number, default: 0.00}
+    sellCosts: {type: Number, default: 0.00},
+    _id: {type: Number, default: 0}
 });

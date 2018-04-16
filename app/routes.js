@@ -34,6 +34,29 @@ module.exports = function(app) {
         });
     });
 
+    app.delete('/api/stocks/:id', function (req, res) {
+        var id = req.params.id;
+        Stock.find({_id:id}, function (err, stocks){
+            console.log("inside find")
+            Stock.remove(function (err, stocks){
+                console.log("inside remove")
+                if (err)
+                    res.send(err)
+                res.json("Deleted!")
+            })
+        })
+    });
+
+    app.get('/api/stocks/:id', function (req, res) {
+
+        var id = req.params.id
+        Stock.find({_id:id}, function (err, stock){
+            if (err)
+                res.send(err)
+            res.send(stock)
+        })
+    });
+
     app.delete('/api/stocks', function (req, res) {
         Stock.remove(function (err, stocks) {
             console.log(stocks)
@@ -42,6 +65,8 @@ module.exports = function(app) {
             res.json("Deleted!")
         });
     });
+
+
 
     app.post('/api/stocks', function(req, res){
         var stock = new Stock();
@@ -58,6 +83,7 @@ module.exports = function(app) {
         stock.gainOrLost = req.body.gainOrLost
         stock.percentGainOrLost = req.body.percentGainOrLost
         stock.sellCosts = req.body.sellCosts
+        stock._id = req.body._id
 
         stock.save(function (err) {
             if (err)

@@ -16,6 +16,7 @@ angular.module('JSONModelService', []).factory('JSONModel', function() {
                 "gainOrLost": 0.00,
                 "percentGainOrlost": 0.00,
                 "sellCosts": 0.00,
+                "_id": 1
             },
             {
                 "description": "Bank Of Ireland",
@@ -30,7 +31,8 @@ angular.module('JSONModelService', []).factory('JSONModel', function() {
                 "value": 0.00,
                 "gainOrLost": 0.00,
                 "percentGainOrLost": 0.00,
-                "sellCosts": 0.00
+                "sellCosts": 0.00,
+                "_id": 2
             },
             {
                 "description": "Bank Of Ireland",
@@ -45,7 +47,8 @@ angular.module('JSONModelService', []).factory('JSONModel', function() {
                 "value": 0.00,
                 "gainOrLost": 0.00,
                 "percentGainOrLost": 0.00,
-                "sellCosts": 0.00
+                "sellCosts": 0.00,
+                "_id": 3
             },
             {
                 "description": "Bank Of Ireland",
@@ -60,7 +63,8 @@ angular.module('JSONModelService', []).factory('JSONModel', function() {
                 "value": 0.00,
                 "gainOrLost": 0.00,
                 "percentGainOrLost": 0.00,
-                "sellCosts": 0.00
+                "sellCosts": 0.00,
+                "_id": 4
             },
             {
                 "description": "Bank Of Ireland",
@@ -75,7 +79,8 @@ angular.module('JSONModelService', []).factory('JSONModel', function() {
                 "value": 0.00,
                 "gainOrLost": 0.00,
                 "percentGainOrLost": 0.00,
-                "sellCosts": 0.00
+                "sellCosts": 0.00,
+                "_id": 5
             },
             {
                 "description": "Bank Of Ireland",
@@ -90,7 +95,8 @@ angular.module('JSONModelService', []).factory('JSONModel', function() {
                 "value": 0.00,
                 "gainOrLost": 0.00,
                 "percentGainOrLost": 0.00,
-                "sellCosts": 0.00
+                "sellCosts": 0.00,
+                "_id": 6
             },
             {
                 "description": "Bank Of Ireland",
@@ -105,7 +111,8 @@ angular.module('JSONModelService', []).factory('JSONModel', function() {
                 "value": 0.00,
                 "gainOrLost": 0.00,
                 "percentGainOrLost": 0.00,
-                "sellCosts": 0.00
+                "sellCosts": 0.00,
+                "_id": 7
             },
             {
                 "description": "Bank Of Ireland",
@@ -120,7 +127,8 @@ angular.module('JSONModelService', []).factory('JSONModel', function() {
                 "value": 0.00,
                 "gainOrLost": 0.00,
                 "percentGainOrLost": 0.00,
-                "sellCosts": 0.00
+                "sellCosts": 0.00,
+                "_id": 8
             },
             {
                 "description": "CRH",
@@ -135,7 +143,8 @@ angular.module('JSONModelService', []).factory('JSONModel', function() {
                 "value": 0.00,
                 "gainOrLost": 0.00,
                 "percentGainOrLost": 0.00,
-                "sellCosts": 0.00
+                "sellCosts": 0.00,
+                "_id": 9
             },
             {
                 "description": "CRH",
@@ -150,7 +159,8 @@ angular.module('JSONModelService', []).factory('JSONModel', function() {
                 "value": 0.00,
                 "gainOrLost": 0.00,
                 "percentGainOrLost": 0.00,
-                "sellCosts": 0.00
+                "sellCosts": 0.00,
+                "_id": 10
             },
             {
                 "description": "CRH",
@@ -165,7 +175,8 @@ angular.module('JSONModelService', []).factory('JSONModel', function() {
                 "value": 0.00,
                 "gainOrLost": 0.00,
                 "percentGainOrLost": 0.00,
-                "sellCosts": 0.00
+                "sellCosts": 0.00,
+                "_id": 11
             },
             {
                 "description": "Tesco",
@@ -180,7 +191,8 @@ angular.module('JSONModelService', []).factory('JSONModel', function() {
                 "value": 0.00,
                 "gainOrLost": 0.00,
                 "percentGainOrlLst": 0.00,
-                "sellCosts": 0.00
+                "sellCosts": 0.00,
+                "_id": 12
             },
             {
                 "description": "Tesco",
@@ -195,7 +207,8 @@ angular.module('JSONModelService', []).factory('JSONModel', function() {
                 "value": 0.00,
                 "gainOrLost": 0.00,
                 "percentGainOrLost": 0.00,
-                "sellCosts": 0.00
+                "sellCosts": 0.00,
+                "_id": 13
             },
             {
                 "description": "Tesco",
@@ -210,7 +223,8 @@ angular.module('JSONModelService', []).factory('JSONModel', function() {
                 "value": 0.00,
                 "gainOrLost": 0.00,
                 "percentGainOrLost": 0.00,
-                "sellCosts": 0.00
+                "sellCosts": 0.00,
+                "_id": 14
             },
             {
                 "description": "Ripple",
@@ -225,7 +239,8 @@ angular.module('JSONModelService', []).factory('JSONModel', function() {
                 "value": 0.00,
                 "gainOrLost": 0.00,
                 "percentGainOrLost": 0.00,
-                "sellCosts": 0.00
+                "sellCosts": 0.00,
+                "_id": 15
             },
             {
                 "description": "Ripple",
@@ -240,7 +255,8 @@ angular.module('JSONModelService', []).factory('JSONModel', function() {
                 "value": 0.00,
                 "gainOrLost": 0.00,
                 "percentGainOrLost": 0.00,
-                "sellCosts": 0.00
+                "sellCosts": 0.00,
+                "_id": 16
             },
             {
                 "description": "Ripple",
@@ -255,7 +271,8 @@ angular.module('JSONModelService', []).factory('JSONModel', function() {
                 "value": 0.00,
                 "gainOrLost": 0.00,
                 "percentGainOrLost": 0.00,
-                "sellCosts": 0.00
+                "sellCosts": 0.00,
+                "_id": 17
             }
         ]
     }
