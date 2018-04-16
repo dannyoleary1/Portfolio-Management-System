@@ -16,6 +16,10 @@ angular.module('MainCtrl', []).controller('MainController', function($scope,$q, 
         stock4 : "Ripple",
         stock5 : "Tesco"
     }
+    $scope.purchasePriceTotal = 0
+    $scope.totalSellPrice = 0
+    $scope.totalCurrentValue = 0
+
 
     $q.all([
         REST.get('/api/stocks'),
@@ -60,6 +64,7 @@ angular.module('MainCtrl', []).controller('MainController', function($scope,$q, 
             var prevEntry
             var total = 0
             var i = 0
+
             $scope.allStocks.forEach(function (entry) {
                 if (entry.description==prevDes){
                     total = total + entry.quantity
@@ -81,8 +86,15 @@ angular.module('MainCtrl', []).controller('MainController', function($scope,$q, 
                     prevEntry = entry
                 }
                 MainUtil.setUpData(entry, $scope.testInfo)
+                $scope.purchasePriceTotal += entry.cost
+                $scope.totalSellPrice += entry.sellCosts
+                console.log(entry.value)
+                console.log(typeof(entry.value))
+                $scope.totalCurrentValue += parseFloat(entry.value)
                 i++
             })
+            $scope.currentValueAfterSellPrice = parseFloat($scope.totalCurrentValue) - parseFloat($scope.totalSellPrice)
+            $scope.netProfit = parseFloat($scope.currentValueAfterSellPrice) - parseFloat($scope.purchasePriceTotal)
         });
     }
     
@@ -197,5 +209,9 @@ angular.module('MainCtrl', []).controller('MainController', function($scope,$q, 
         }).then(function (data){
             $scope.updateTableData()
         });
+    }
+    
+    $scope.sellStock = function () {
+
     }
 });

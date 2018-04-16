@@ -24,6 +24,32 @@
     </div>
 </div>
 
+<div class="modal fade" id="sellModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="sellModalLabel">Sell Stock</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    Description: <select ng-model="description" ng-options="x for x in descriptionSelectBox"></select><br>
+                    <br>
+                    Quantity: <input ng-model="quantity"></input><br>
+                    <br>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                <button ng-click="sellStock()" type="button" class="btn btn-primary" data-dismiss="modal">Sell Stock</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
 <div class="row">
     <div class="col">
@@ -39,7 +65,16 @@
         <h5>Select Test Case:   </h5>
         <select ng-model="currentCase" ng-options="x for x in testCase" ng-change="updateTableData()"></select>
     </div>
+    <div class="col">
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#sellModal">
+            <i class="fas fa-plus"></i> Sell Stock
+        </button>
+    </div>
+    <div class="col">
+        Net Profit/Loss: {{netProfit}}
+    </div>
 </div>
+
 <table id="stock-table" class="table table-sm">
     <thead id="stock-table-header" class="thead-dark">
         <tr>
@@ -82,5 +117,19 @@
         </tr>
     </tbody>
 </table>
+<div class="row">
+    <div class="col">
+        Total Purchase Price: {{purchasePriceTotal}}
+    </div>
+    <div class="col">
+        Total Sell Costs: {{totalSellPrice}}
+    </div>
+    <div class="col">
+        Total Current Price: {{totalCurrentValue}}
+    </div>
+    <div class="col">
+        Net Total Current Price: {{currentValueAfterSellPrice}}
+    </div>
+</div>
 
 
