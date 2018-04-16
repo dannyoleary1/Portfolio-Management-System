@@ -24,13 +24,7 @@ angular.module('MainCtrl', []).controller('MainController', function($scope,$q, 
         $scope.allStocks = data[0];
         $scope.testInfo = data[1];
         $scope.allStocks.sort(function(a,b){
-                var desA = a.description.toLowerCase();
-                var desB = b.description.toLowerCase();
-                if (desA < desB) //sort string ascending
-                    return -1;
-                if (desA > desB)
-                    return 1;
-                return 0 //default return value (no sorting)
+            return cmp(a.description.toLowerCase(), b.description.toLowerCase()) || cmp(a.dateIn, b.dateIn)
             }
         );
         $scope.allStocks.forEach(function (entry) {
@@ -56,14 +50,7 @@ angular.module('MainCtrl', []).controller('MainController', function($scope,$q, 
             $scope.currentValueAfterSellPrice = 0;
             $scope.netProfit = 0;
             $scope.allStocks.sort(function(a,b){
-                    console.log(desA)
-                    var desA = a.description.toLowerCase();
-                    var desB = b.description.toLowerCase();
-                    if (desA < desB) //sort string ascending
-                        return -1;
-                    if (desA > desB)
-                        return 1;
-                    return 0; //default return value (no sorting)
+                   return cmp(a.description.toLowerCase(), b.description.toLowerCase()) || cmp(a.dateIn, b.dateIn)
                 }
             );
             var prevDes = "";
@@ -214,7 +201,13 @@ angular.module('MainCtrl', []).controller('MainController', function($scope,$q, 
             $scope.updateTableData()
         });
     };
-    
+
+    cmp = function(a, b) {
+        if (a > b) return +1;
+        if (a < b) return -1;
+        return 0;
+    }
+
     $scope.sellStock = function () {
         var prevEntry;
         $scope.allStocks.forEach(function (entry){
