@@ -5,8 +5,8 @@ angular.module('MainUtilService', []).factory('MainUtil', function() {
     function getSellCostValue(value){
         if (value < 25000){
             val = (value*0.01)+1.25
-            if (val < 25){
-                return 25+1.25
+            if (val < 26.25){
+                return 26.25
             }
             return (value*0.01)+1.25
         }
@@ -14,8 +14,8 @@ angular.module('MainUtilService', []).factory('MainUtil', function() {
             var tempVal = 25000*0.01
             value = (value - 25000)
             value = (value*0.005)+1.25
-            if (tempVal+value<25){
-                return 25+1.25
+            if (tempVal+value<26.25){
+                return 26.25
             }
             return (tempVal + value)
         }
