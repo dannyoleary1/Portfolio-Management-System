@@ -4,14 +4,22 @@ angular.module('MainUtilService', []).factory('MainUtil', function() {
     }
     function getSellCostValue(value){
         if (value < 25000){
+            val = (value*0.01)+1.25
+            if (val < 25){
+                return 25+1.25
+            }
             return (value*0.01)+1.25
         }
         else{
             var tempVal = 25000*0.01
             value = (value - 25000)
             value = (value*0.005)+1.25
+            if (tempVal+value<25){
+                return 25+1.25
+            }
             return (tempVal + value)
         }
+
     }
     function assignValuesToEntry(currencyData){
         currencyData.value = (currencyData.quantity * currencyData.price).toFixed(2)
@@ -21,9 +29,12 @@ angular.module('MainUtilService', []).factory('MainUtil', function() {
     }
     return{
         setUpData : function (currencyData, queryData) {
+            (currencyData).cost.toFixed(2)
+            console.log(currencyData)
+            currencyData.purchasePrice = getPurchasePrice(currencyData)
             if (currencyData.location == 'ise'){
                 //step one. Get purchase price.
-                currencyData.purchasePrice = getPurchasePrice(currencyData)
+
                 if (currencyData.symbol == 'AIBG_I'){
                     currencyData.price = queryData.ise.data[0].price
                     assignValuesToEntry(currencyData)
