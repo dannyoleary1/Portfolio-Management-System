@@ -37,9 +37,7 @@ module.exports = function(app) {
     app.delete('/api/stocks/:id', function (req, res) {
         var id = req.params.id;
         Stock.find({_id:id}, function (err, stocks){
-            console.log("inside find")
             Stock.remove(function (err, stocks){
-                console.log("inside remove")
                 if (err)
                     res.send(err)
                 res.json("Deleted!")

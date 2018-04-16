@@ -8,7 +8,7 @@ angular.module('MainCtrl', []).controller('MainController', function($scope,$q, 
     $scope.description = "";
     $scope.quantity = 0;
     $scope.price = 0;
-
+    $scope.uid = 17;
     $scope.descriptionSelectBox = {
         stock1 : "AIB",
         stock2 : "Bank Of Ireland",
@@ -84,10 +84,10 @@ angular.module('MainCtrl', []).controller('MainController', function($scope,$q, 
                 i++
             })
         });
-        REST.deleteOne("/api/stocks/",1)
     }
     
     $scope.addEntry = function () {
+        $scope.uid +=1
         var ise = ["AIB", "Bank of Ireland", "CRH"]
         var currentTime = new Date().toLocaleDateString();
         if (ise.includes($scope.description)){
@@ -107,6 +107,7 @@ angular.module('MainCtrl', []).controller('MainController', function($scope,$q, 
                     "gainOrLost": 0.00,
                     "percentGainOrlost": 0.00,
                     "sellCosts": 0.00,
+                    "_id": $scope.uid
                 }
             }
             else if ($scope.description == "Bank of Ireland"){
@@ -124,6 +125,7 @@ angular.module('MainCtrl', []).controller('MainController', function($scope,$q, 
                     "gainOrLost": 0.00,
                     "percentGainOrlost": 0.00,
                     "sellCosts": 0.00,
+                    "_id":$scope.uid
                 }
             }
             else {
@@ -140,7 +142,8 @@ angular.module('MainCtrl', []).controller('MainController', function($scope,$q, 
                     "value": 0.00,
                     "gainOrLost": 0.00,
                     "percentGainOrLost": 0.00,
-                    "sellCosts": 0.00
+                    "sellCosts": 0.00,
+                    "_id":$scope.uid
                 }
             }
         }
@@ -158,7 +161,8 @@ angular.module('MainCtrl', []).controller('MainController', function($scope,$q, 
                 "value": 0.00,
                 "gainOrLost": 0.00,
                 "percentGainOrlLst": 0.00,
-                "sellCosts": 0.00
+                "sellCosts": 0.00,
+                "_id":$scope.uid
             }
         }
         else{
@@ -175,7 +179,8 @@ angular.module('MainCtrl', []).controller('MainController', function($scope,$q, 
                 "value": 0.00,
                 "gainOrLost": 0.00,
                 "percentGainOrLost": 0.00,
-                "sellCosts": 0.00
+                "sellCosts": 0.00,
+                "_id":$scope.uid
             }
         }
         REST.create("api/stocks", body).then(function (data){
