@@ -15,6 +15,8 @@ angular.module('MainCtrl', []).controller('MainController', function($scope,$q, 
     $scope.purchasePriceTotal = 0;
     $scope.totalSellPrice = 0;
     $scope.totalCurrentValue = 0;
+    $scope.cashHolding = 100;
+    $scope.cashHoldingValue = 100;
 
 
     $q.all([
@@ -29,9 +31,9 @@ angular.module('MainCtrl', []).controller('MainController', function($scope,$q, 
         );
         $scope.allStocks.forEach(function (entry) {
             MainUtil.setUpData(entry, $scope.testInfo);
-            $scope.purchasePriceTotal += entry.cost;
+            $scope.purchasePriceTotal += entry.cost + $scope.cashHolding;
             $scope.totalSellPrice += entry.sellCosts;
-            $scope.totalCurrentValue += parseFloat(entry.value);
+            $scope.totalCurrentValue += parseFloat(entry.value) + $scope.cashHoldingValue;
         })
         $scope.currentValueAfterSellPrice = parseFloat($scope.totalCurrentValue) - parseFloat($scope.totalSellPrice);
         $scope.netProfit = parseFloat($scope.currentValueAfterSellPrice) - parseFloat($scope.purchasePriceTotal);
