@@ -1,8 +1,4 @@
 angular.module('MainCtrl', []).controller('MainController', function($scope,$q, JSONModel, REST, MainUtil) {
-     // var test = JSONModel.get()
-     // test.stocks.forEach(function (value) {
-     //     REST.create('/api/stocks', value)
-     // })
     $scope.testCase = [0,1,2,3,4,5];
     $scope.currentCase = 0;
     $scope.description = "";
@@ -15,10 +11,10 @@ angular.module('MainCtrl', []).controller('MainController', function($scope,$q, 
         stock3 : "CRH",
         stock4 : "Ripple",
         stock5 : "Tesco"
-    }
-    $scope.purchasePriceTotal = 0
-    $scope.totalSellPrice = 0
-    $scope.totalCurrentValue = 0
+    };
+    $scope.purchasePriceTotal = 0;
+    $scope.totalSellPrice = 0;
+    $scope.totalCurrentValue = 0;
 
 
     $q.all([
@@ -28,23 +24,23 @@ angular.module('MainCtrl', []).controller('MainController', function($scope,$q, 
         $scope.allStocks = data[0];
         $scope.testInfo = data[1];
         $scope.allStocks.sort(function(a,b){
-                var desA = a.description.toLowerCase()
-                var desB = b.description.toLowerCase()
+                var desA = a.description.toLowerCase();
+                var desB = b.description.toLowerCase();
                 if (desA < desB) //sort string ascending
-                    return -1
+                    return -1;
                 if (desA > desB)
-                    return 1
+                    return 1;
                 return 0 //default return value (no sorting)
             }
         );
         $scope.allStocks.forEach(function (entry) {
-            MainUtil.setUpData(entry, $scope.testInfo)
-            $scope.purchasePriceTotal += entry.cost
-            $scope.totalSellPrice += entry.sellCosts
-            $scope.totalCurrentValue += parseFloat(entry.value)
+            MainUtil.setUpData(entry, $scope.testInfo);
+            $scope.purchasePriceTotal += entry.cost;
+            $scope.totalSellPrice += entry.sellCosts;
+            $scope.totalCurrentValue += parseFloat(entry.value);
         })
-        $scope.currentValueAfterSellPrice = parseFloat($scope.totalCurrentValue) - parseFloat($scope.totalSellPrice)
-        $scope.netProfit = parseFloat($scope.currentValueAfterSellPrice) - parseFloat($scope.purchasePriceTotal)
+        $scope.currentValueAfterSellPrice = parseFloat($scope.totalCurrentValue) - parseFloat($scope.totalSellPrice);
+        $scope.netProfit = parseFloat($scope.currentValueAfterSellPrice) - parseFloat($scope.purchasePriceTotal);
     });
 
     $scope.updateTableData = function () {
@@ -54,56 +50,61 @@ angular.module('MainCtrl', []).controller('MainController', function($scope,$q, 
         ]).then(function(data) {
             $scope.allStocks = data[0];
             $scope.testInfo = data[1];
+            $scope.purchasePriceTotal = 0;
+            $scope.totalSellPrice = 0;
+            $scope.totalCurrentValue = 0;
+            $scope.currentValueAfterSellPrice = 0;
+            $scope.netProfit = 0;
             $scope.allStocks.sort(function(a,b){
                     console.log(desA)
-                    var desA = a.description.toLowerCase()
-                    var desB = b.description.toLowerCase()
+                    var desA = a.description.toLowerCase();
+                    var desB = b.description.toLowerCase();
                     if (desA < desB) //sort string ascending
-                        return -1
+                        return -1;
                     if (desA > desB)
-                        return 1
-                    return 0 //default return value (no sorting)
+                        return 1;
+                    return 0; //default return value (no sorting)
                 }
             );
-            var prevDes = ""
-            var prevEntry
-            var total = 0
-            var i = 0
+            var prevDes = "";
+            var prevEntry;
+            var total = 0;
+            var i = 0;
 
             $scope.allStocks.forEach(function (entry) {
                 if (entry.description==prevDes){
-                    total = total + entry.quantity
-                    prevEntry = entry
+                    total = total + entry.quantity;
+                    prevEntry = entry;
                     if (i==$scope.allStocks.length-1){
-                        prevEntry.total = total
+                        prevEntry.total = total;
                     }
                 }
                 else if (entry.description!=prevDes) {
                     console.log(prevDes)
                     console.log(total)
                     if (prevEntry!=undefined) {
-                        prevEntry.total = total
+                        prevEntry.total = total;
                     }
                     //New Entry.
-                    total = 0
-                    total = total + entry.quantity
-                    prevDes = entry.description
-                    prevEntry = entry
+                    total = 0;
+                    total = total + entry.quantity;
+                    prevDes = entry.description;
+                    prevEntry = entry;
                 }
-                MainUtil.setUpData(entry, $scope.testInfo)
-                $scope.purchasePriceTotal += entry.cost
-                $scope.totalSellPrice += entry.sellCosts
-                $scope.totalCurrentValue += parseFloat(entry.value)
-                i++
+                MainUtil.setUpData(entry, $scope.testInfo);
+                $scope.purchasePriceTotal += entry.cost;
+                $scope.totalSellPrice += entry.sellCosts;
+                $scope.totalCurrentValue += parseFloat(entry.value);
+                i++;
             })
-            $scope.currentValueAfterSellPrice = parseFloat($scope.totalCurrentValue) - parseFloat($scope.totalSellPrice)
-            $scope.netProfit = parseFloat($scope.currentValueAfterSellPrice) - parseFloat($scope.purchasePriceTotal)
+            $scope.currentValueAfterSellPrice = parseFloat($scope.totalCurrentValue) - parseFloat($scope.totalSellPrice);
+            $scope.netProfit = parseFloat($scope.currentValueAfterSellPrice) - parseFloat($scope.purchasePriceTotal);
         });
     }
     
     $scope.addEntry = function () {
-        $scope.uid +=1
-        var ise = ["AIB", "Bank of Ireland", "CRH"]
+        $scope.uid +=1;
+        var ise = ["AIB", "Bank of Ireland", "CRH"];
         var currentTime = new Date().toLocaleDateString();
         if (ise.includes($scope.description)){
             //TODO get date.
@@ -201,20 +202,32 @@ angular.module('MainCtrl', []).controller('MainController', function($scope,$q, 
         REST.create("api/stocks", body).then(function (data){
             $scope.updateTableData()
         })
-    }
+    };
 
     $scope.resetData = function () {
         REST.delete("api/stocks").then(function (data){
-             var test = JSONModel.get()
+             var test = JSONModel.get();
              test.stocks.forEach(function (value) {
                  REST.create('/api/stocks', value)
              })
         }).then(function (data){
             $scope.updateTableData()
         });
-    }
+    };
     
     $scope.sellStock = function () {
-
+        var prevEntry;
+        $scope.allStocks.forEach(function (entry){
+            if(entry.description==$scope.description){
+                if ($scope.quantity>entry.quantity){
+                    console.log($scope.quantity)
+                }
+                else{
+                    entry.quantity -= $scope.quantity
+                    REST.update("/api/stocks/"+entry._id, entry)
+                }
+            }
+        })
+        $scope.updateTableData()
     }
 });

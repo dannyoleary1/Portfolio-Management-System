@@ -17,6 +17,10 @@ angular.module('RESTService', []).factory('REST', ['$http', function($http) {
 
         deleteOne: function (url,id) {
             return $http.delete(url+id)
+        },
+
+        update: function(url, postData){
+            return $http.put(url, postData)
         }
     }
 }])

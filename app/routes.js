@@ -45,6 +45,15 @@ module.exports = function(app) {
         })
     });
 
+    app.put('/api/stocks/:id', function (req, res) {
+        var id = req.params.id;
+        Stock.findByIdAndUpdate(id, {$set:req.body}, function(err, stock){
+            if (err)
+                console.log(err)
+            res.json({message: 'Stock Updated!'});
+        });
+    });
+
     app.get('/api/stocks/:id', function (req, res) {
 
         var id = req.params.id
