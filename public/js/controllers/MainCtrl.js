@@ -39,7 +39,12 @@ angular.module('MainCtrl', []).controller('MainController', function($scope,$q, 
         );
         $scope.allStocks.forEach(function (entry) {
             MainUtil.setUpData(entry, $scope.testInfo)
+            $scope.purchasePriceTotal += entry.cost
+            $scope.totalSellPrice += entry.sellCosts
+            $scope.totalCurrentValue += parseFloat(entry.value)
         })
+        $scope.currentValueAfterSellPrice = parseFloat($scope.totalCurrentValue) - parseFloat($scope.totalSellPrice)
+        $scope.netProfit = parseFloat($scope.currentValueAfterSellPrice) - parseFloat($scope.purchasePriceTotal)
     });
 
     $scope.updateTableData = function () {
@@ -88,8 +93,6 @@ angular.module('MainCtrl', []).controller('MainController', function($scope,$q, 
                 MainUtil.setUpData(entry, $scope.testInfo)
                 $scope.purchasePriceTotal += entry.cost
                 $scope.totalSellPrice += entry.sellCosts
-                console.log(entry.value)
-                console.log(typeof(entry.value))
                 $scope.totalCurrentValue += parseFloat(entry.value)
                 i++
             })

@@ -107,7 +107,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat="value in allStocks|filter:search">
+        <tr dir-paginate="value in allStocks|filter:search|itemsPerPage:10">
             <td>{{value.description}}</td>
             <td>{{value.location}}</td>
             <td>{{value.symbol}}</td>
@@ -128,6 +128,13 @@
         </tr>
     </tbody>
 </table>
+<div class="pagination">
+<dir-pagination-controls
+        max-size="5"
+        direction-links="true"
+        boundary-links="true" >
+</dir-pagination-controls>
+</div>
 <div class="row">
     <div class="col">
         Total Purchase Price: {{purchasePriceTotal}}
