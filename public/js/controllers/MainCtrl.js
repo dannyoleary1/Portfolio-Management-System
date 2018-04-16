@@ -29,12 +29,36 @@ angular.module('MainCtrl', []).controller('MainController', function($scope,$q, 
             return cmp(a.description.toLowerCase(), b.description.toLowerCase()) || cmp(a.dateIn, b.dateIn)
             }
         );
+        var prevDes = "";
+        var prevEntry;
+        var total = 0;
+        var i = 0;
         $scope.allStocks.forEach(function (entry) {
+            if (entry.description==prevDes){
+                total = total + entry.quantity;
+                prevEntry = entry;
+                if (i==$scope.allStocks.length-1){
+                    prevEntry.total = total;
+                }
+            }
+            else if (entry.description!=prevDes) {
+                if (prevEntry!=undefined) {
+                    prevEntry.total = total;
+                }
+                //New Entry.
+                total = 0;
+                total = total + entry.quantity;
+                prevDes = entry.description;
+                prevEntry = entry;
+            }
             MainUtil.setUpData(entry, $scope.testInfo);
-            $scope.purchasePriceTotal += entry.cost + $scope.cashHolding;
+            i++
+            $scope.purchasePriceTotal += parseFloat(entry.cost);
             $scope.totalSellPrice += entry.sellCosts;
-            $scope.totalCurrentValue += parseFloat(entry.value) + $scope.cashHoldingValue;
+            $scope.totalCurrentValue += parseFloat(entry.value);
         })
+        $scope.purchasePriceTotal += parseFloat($scope.cashHolding);
+        $scope.totalCurrentValue += parseFloat($scope.cashHoldingValue);
         $scope.currentValueAfterSellPrice = parseFloat($scope.totalCurrentValue) - parseFloat($scope.totalSellPrice);
         $scope.netProfit = parseFloat($scope.currentValueAfterSellPrice) - parseFloat($scope.purchasePriceTotal);
     });
@@ -69,8 +93,6 @@ angular.module('MainCtrl', []).controller('MainController', function($scope,$q, 
                     }
                 }
                 else if (entry.description!=prevDes) {
-                    console.log(prevDes)
-                    console.log(total)
                     if (prevEntry!=undefined) {
                         prevEntry.total = total;
                     }
@@ -81,11 +103,13 @@ angular.module('MainCtrl', []).controller('MainController', function($scope,$q, 
                     prevEntry = entry;
                 }
                 MainUtil.setUpData(entry, $scope.testInfo);
-                $scope.purchasePriceTotal += entry.cost;
+                $scope.purchasePriceTotal += parseFloat(entry.cost);
                 $scope.totalSellPrice += entry.sellCosts;
                 $scope.totalCurrentValue += parseFloat(entry.value);
                 i++;
             })
+            $scope.purchasePriceTotal += parseFloat($scope.cashHolding);
+            $scope.totalCurrentValue += parseFloat($scope.cashHoldingValue);
             $scope.currentValueAfterSellPrice = parseFloat($scope.totalCurrentValue) - parseFloat($scope.totalSellPrice);
             $scope.netProfit = parseFloat($scope.currentValueAfterSellPrice) - parseFloat($scope.purchasePriceTotal);
         });

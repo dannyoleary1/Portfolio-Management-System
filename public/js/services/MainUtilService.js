@@ -29,7 +29,7 @@ angular.module('MainUtilService', []).factory('MainUtil', function() {
     }
     return{
         setUpData : function (currencyData, queryData) {
-            (currencyData).cost.toFixed(2)
+            currencyData.cost = (currencyData.cost).toFixed(2)
             console.log(currencyData)
             currencyData.purchasePrice = getPurchasePrice(currencyData)
             if (currencyData.location == 'ise'){
