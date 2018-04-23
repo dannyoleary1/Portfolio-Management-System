@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Transaction History</title>
+</head>
+<body>
+<table id="stock-table" class="table table-sm">
+    <thead id="stock-table-header" class="thead-dark">
+    <tr>
+        <th id="stock-description">Description</th>
+        <th id="stock-location">Location</th>
+        <th id="stock-symbol">Symbol</th>
+        <th id="stock-date-in">Date Bought</th>
+        <th id="stock-date-out">Date Out</th>
+        <th id="stock-quantity">Quantity</th>
+        <th id="stock-gain-or-loss">Gain/Loss</th>
+    </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="value in allTransactions">
+            <td>{{value.description}}</td>
+            <td>{{value.location}}</td>
+            <td>{{value.symbol}}</td>
+            <td>{{value.dateIn}}</td>
+            <td>{{value.dateOut}}</td>
+            <td>{{value.quantity}}</td>
+            <td ng-if="value.profitOrLoss < 0" class="text-danger">{{value.profitOrLoss}}</td>
+            <td ng-if="value.profitOrLoss > 0" class="text-success">{{value.profitOrLoss}}</td>
+        </tr>
+    </tbody>
+</table>
+</body>
+</html>

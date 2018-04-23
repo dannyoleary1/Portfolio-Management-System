@@ -7,7 +7,12 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
         .when('/', {
             templateUrl: 'views/home.html',
             controller: 'MainController'
-        });
+        })
+
+        .when('/transaction', {
+            templateUrl: 'views/transaction.html',
+            controller: 'TransactionController'
+    });
 
 
     $locationProvider.html5Mode(true);

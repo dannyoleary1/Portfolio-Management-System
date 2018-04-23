@@ -1,6 +1,5 @@
 angular.module('MainCtrl', []).controller('MainController', function($scope,$q, JSONModel, REST, MainUtil) {
     $scope.testCase = [0,1,2,3,4,5];
-
     $scope.currentCase = 0;
     $scope.description = "";
     $scope.quantity = 0;
@@ -18,6 +17,7 @@ angular.module('MainCtrl', []).controller('MainController', function($scope,$q, 
     $scope.totalCurrentValue = 0;
     $scope.totalByStock = {};
     $scope.soldStockProfit = 0;
+    $scope.profitOrLoss = 0;
 
     $q.all([
         REST.get('/api/stocks'),
@@ -85,7 +85,6 @@ angular.module('MainCtrl', []).controller('MainController', function($scope,$q, 
             var prevEntry;
             var total = 0;
             var i = 0;
-
             $scope.allStocks.forEach(function (entry) {
                 if (entry.description==prevDes){
                     total = total + entry.quantity;
@@ -272,6 +271,7 @@ angular.module('MainCtrl', []).controller('MainController', function($scope,$q, 
                     value = entry.price * $scope.quantity; //Does that even make sense? Maybe..
                     entry.cost = newCost;
                     var body = MainUtil.sellingStock(cost, value, entry, $scope.quantity);
+                    $scope.profitOrLoss += parseFloat(body.profitOrLoss)
                     //Now do I calculate the sell price using the two of these??
                     REST.update("/api/stocks/" + entry._id, entry);
                     REST.create('/api/transactionHistory', body);
