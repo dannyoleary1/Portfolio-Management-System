@@ -71,7 +71,7 @@
         </button>
     </div>
     <div class="col">
-        Net Profit/Loss: {{netProfit}}
+        Net Profit/Loss (Sold Separately): {{netProfit}}
     </div>
 </div>
 
@@ -107,21 +107,6 @@
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td>Cash Holding</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>1</td>
-            <td>{{cashHolding}}</td>
-            <td>1.00</td>
-            <td></td>
-            <td>{{cashHoldingValue}}</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
         <tr dir-paginate="value in allStocks|filter:search|itemsPerPage:10">
             <td>{{value.description}}</td>
             <td>{{value.location}}</td>

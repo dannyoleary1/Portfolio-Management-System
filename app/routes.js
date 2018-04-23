@@ -1,28 +1,14 @@
 // app/routes.js
 
 // grab the nerd model we just created
-var Nerd = require('./models/nerd');
 var Stock = require('./models/stock');
+var transactionHistory = require('./models/transactionHistory');
 
 module.exports = function(app) {
 
     // server routes ===========================================================
     // handle things like api calls
     // authentication routes
-
-    // sample api route
-    app.get('/api/nerds', function(req, res) {
-        // use mongoose to get all nerds in the database
-        Nerd.find(function(err, nerds) {
-
-            // if there is an error retrieving, send the error.
-            // nothing after res.send(err) will execute
-            if (err)
-                res.send(err);
-
-            res.json(nerds); // return all nerds in JSON format
-        });
-    });
 
     app.get('/api/stocks', function(req, res){
         //use mongoose to get all stocks in the database
@@ -34,14 +20,22 @@ module.exports = function(app) {
         });
     });
 
+    app.get('/api/transactionHistory', function (req, res) {
+        transactionHistory.find(function (err, transactions) {
+            if (err)
+                res.send(err);
+            res.json(transactions);
+        })
+    });
+
     app.delete('/api/stocks/:id', function (req, res) {
         var id = req.params.id;
-        Stock.find({_id:id}, function (err, stocks){
-            Stock.remove(function (err, stocks){
+        Stock.findByIdAndRemove(id, function (err, stocks){
+            console.log("inside remove")
                 if (err)
                     res.send(err)
                 res.json("Deleted!")
-            })
+
         })
     });
 
@@ -65,6 +59,7 @@ module.exports = function(app) {
     });
 
     app.delete('/api/stocks', function (req, res) {
+        console.log("in reg delete");
         Stock.remove(function (err, stocks) {
             console.log(stocks)
             if (err)
@@ -73,24 +68,47 @@ module.exports = function(app) {
         });
     });
 
+    app.delete('/api/transactionHistory', function (req, res) {
+        transactionHistory.remove(function (err, transactions) {
+            if (err)
+                res.send(err);
+            res.json("Deleted!");
+        })
+    })
 
+    app.post('/api/transactionHistory', function (req, res) {
+        var transaction = new transactionHistory();
+        transaction.description = req.body.description;
+        transaction.location = req.body.location;
+        transaction.symbol = req.body.symbol;
+        transaction.dateIn = req.body.dateIn;
+        transaction.quantity = req.body.quantity;
+        transaction.dateOut = req.body.dateOut;
+        transaction.profitOrLoss = req.body.profitOrLoss;
+        transaction._id = req.body._id;
+        transaction.save(function (err) {
+            if (err)
+                res.send(err);
+            res.json({message: 'Transaction Created!'});
+        });
+    });
 
     app.post('/api/stocks', function(req, res){
         var stock = new Stock();
-        stock.description = req.body.description
-        stock.location = req.body.location
-        stock.symbol = req.body.symbol
-        stock.dateIn = req.body.dateIn
-        stock.quantity = req.body.quantity
-        stock.cost = req.body.cost
-        stock.dateOut = req.body.dateOut
-        stock.purchasePrice = req.body.purchasePrice
-        stock.price = req.body.price
-        stock.value = req.body.value
-        stock.gainOrLost = req.body.gainOrLost
-        stock.percentGainOrLost = req.body.percentGainOrLost
-        stock.sellCosts = req.body.sellCosts
-        stock._id = req.body._id
+        stock.description = req.body.description;
+        stock.location = req.body.location;
+        stock.symbol = req.body.symbol;
+        stock.dateIn = req.body.dateIn;
+        stock.quantity = req.body.quantity;
+        stock.cost = req.body.cost;
+        stock.dateOut = req.body.dateOut;
+        stock.purchasePrice = req.body.purchasePrice;
+        stock.price = req.body.price;
+        stock.value = req.body.value;
+        stock.gainOrLost = req.body.gainOrLost;
+        stock.percentGainOrLost = req.body.percentGainOrLost;
+        stock.sellCosts = req.body.sellCosts;
+        stock._id = req.body._id;
 
         stock.save(function (err) {
             if (err)

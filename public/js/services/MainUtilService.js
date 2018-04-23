@@ -19,7 +19,6 @@ angular.module('MainUtilService', []).factory('MainUtil', function() {
             }
             return (tempVal + value)
         }
-
     }
     function assignValuesToEntry(currencyData){
         currencyData.value = (currencyData.quantity * currencyData.price).toFixed(2)
@@ -29,9 +28,10 @@ angular.module('MainUtilService', []).factory('MainUtil', function() {
     }
     return{
         setUpData : function (currencyData, queryData) {
-            currencyData.cost = (currencyData.cost).toFixed(2)
-            console.log(currencyData)
-            currencyData.purchasePrice = getPurchasePrice(currencyData)
+            currencyData.cost = (currencyData.cost).toFixed(2);
+            if (currencyData.purchasePrice == 0) {
+                currencyData.purchasePrice = getPurchasePrice(currencyData)
+            }
             if (currencyData.location == 'ise'){
                 //step one. Get purchase price.
 
