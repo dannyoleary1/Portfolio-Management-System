@@ -18,7 +18,51 @@ angular.module('MainCtrl', []).controller('MainController', function($scope,$q, 
     $scope.totalByStock = {};
     $scope.soldStockProfit = 0;
     $scope.profitOrLoss = 0;
+    $scope.whatIfState = 0;
 
+    $scope.resetState = function () {
+      $scope.whatIfState = 0;
+    };
+    $scope.whatIfStateOne = function () {
+        //calculate all the profits/loss per stock basis
+        var holdingArray = {};
+        var prevEntry;
+        var totalCost = 0;
+        var totalValue = 0;
+        var i = 0;
+        $scope.allStocks.forEach(function (entry) {
+            //same entries.
+
+            if (prevEntry != undefined) {
+                if (entry.description == prevEntry.description) {
+                    console.log(entry.value);
+                    totalCost += parseFloat(prevEntry.cost);
+                    totalValue += parseFloat(prevEntry.value);
+                    prevEntry = entry;
+                    if (i==$scope.allStocks.length-1){
+                        totalCost += parseFloat(entry.cost);
+                        totalValue += parseFloat(entry.value);
+                        holdingArray[entry.description] = totalValue;
+                    }
+                }
+                else {
+                    totalCost += parseFloat(prevEntry.cost);
+                    totalValue += parseFloat(prevEntry.value);
+                    holdingArray[prevEntry.description] = totalValue;
+                    totalCost = 0;
+                    totalValue = 0;
+                    prevEntry = entry;
+                }
+            }
+            else {
+                prevEntry = entry;
+            }
+            i++;
+        });
+
+        $scope.whatIfState = 1;
+        console.log(holdingArray)
+    }
     $q.all([
         REST.get('/api/stocks'),
         REST.get('https://scraper601.herokuapp.com/scrape/test?n='+$scope.currentCase)
