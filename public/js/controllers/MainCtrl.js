@@ -96,6 +96,9 @@ angular.module('MainCtrl', []).controller('MainController', function($scope,$q, 
                 }
                 else if (entry.description!=prevDes) {
                     if (prevEntry!=undefined) {
+                        if (prevEntry.description != ""){
+                            $scope.totalByStock[prevEntry.description] = total
+                        }
                         prevEntry.total = total;
                     }
                     //New Entry.
@@ -224,7 +227,9 @@ angular.module('MainCtrl', []).controller('MainController', function($scope,$q, 
                  REST.create('/api/stocks', value)
              })
         }).then(function (data){
-            $scope.updateTableData()
+            REST.delete("api/transactionHistory")
+        }).then(function (data) {
+            $scope.updateTableData();
         });
     };
 
@@ -266,11 +271,14 @@ angular.module('MainCtrl', []).controller('MainController', function($scope,$q, 
                     cost += eval(parseFloat(entry.cost) - parseFloat(newCost)); //This is the remaining balance from the old cost - the new.
                     value = entry.price * $scope.quantity; //Does that even make sense? Maybe..
                     entry.cost = newCost;
-                    console.log(value);
-                    console.log(cost);
+                    var body = MainUtil.sellingStock(cost, value, entry, $scope.quantity);
                     //Now do I calculate the sell price using the two of these??
-                    REST.update("/api/stocks/" + entry._id, entry)
+                    REST.update("/api/stocks/" + entry._id, entry);
+                    REST.create('/api/transactionHistory', body);
                     finished=true;
+                    if (entry.quantity==0){
+                        REST.deleteOne('/api/stocks', entry._id);
+                    }
                 }
             }
             }

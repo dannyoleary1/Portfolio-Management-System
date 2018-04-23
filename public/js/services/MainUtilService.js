@@ -1,4 +1,6 @@
 angular.module('MainUtilService', []).factory('MainUtil', function() {
+
+
     function getPurchasePrice(data){
         return (data.cost/data.quantity).toFixed(2)
     }
@@ -60,6 +62,23 @@ angular.module('MainUtilService', []).factory('MainUtil', function() {
 
         getPurchasePrice : function () {
 
+        },
+
+        sellingStock: function (cost, value, information, total) {
+            console.log(information)
+
+            var tax = getSellCostValue(value);
+            var profitOrLoss = (value-tax)-cost;
+            var body = {
+                "description": information.description,
+                "location": information.location,
+                "symbol": information.symbol,
+                "dateIn": information.dateIn,
+                "quantity": total,
+                "dateOut": information.dateOut,
+                "profitOrLoss": profitOrLoss
+            }
+            return body;
         }
     }
 })

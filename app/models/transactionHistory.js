@@ -12,5 +12,4 @@ module.exports = mongoose.model('transactionHistory', {
     quantity: {type: Number, default: 0},
     dateOut: {type: String, default: ""},
     profitOrLoss: {type: Number, default: 0},
-    _id: {type: Number, default: 0}
 });

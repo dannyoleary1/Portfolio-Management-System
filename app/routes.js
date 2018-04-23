@@ -77,6 +77,7 @@ module.exports = function(app) {
     })
 
     app.post('/api/transactionHistory', function (req, res) {
+        console.log("inside post");
         var transaction = new transactionHistory();
         transaction.description = req.body.description;
         transaction.location = req.body.location;
