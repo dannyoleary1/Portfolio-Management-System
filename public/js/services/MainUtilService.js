@@ -10,7 +10,7 @@ angular.module('MainUtilService', []).factory('MainUtil', function() {
             if (val < 26.25){
                 return 26.25
             }
-            return (value*0.01)+1.25
+            return ((value*0.01)+1.25).toFixed(2);
         }
         else{
             var tempVal = 25000*0.01
@@ -19,11 +19,11 @@ angular.module('MainUtilService', []).factory('MainUtil', function() {
             if (tempVal+value<26.25){
                 return 26.25
             }
-            return (tempVal + value)
+            return (tempVal + value).toFixed(2);
         }
     }
     function assignValuesToEntry(currencyData){
-        currencyData.value = (currencyData.quantity * currencyData.price).toFixed(2)
+        currencyData.value = (currencyData.quantity * currencyData.price).toFixed(2);
         currencyData.sellCosts = getSellCostValue(currencyData.value)
         currencyData.gainOrLost = (currencyData.value - currencyData.cost)-currencyData.sellCosts
         currencyData.percentGainOrLost = Math.round((currencyData.gainOrLost/currencyData.cost)*100)+"%"
@@ -89,6 +89,9 @@ angular.module('MainUtilService', []).factory('MainUtil', function() {
                     currencyData.price = queryData.coinranking.data[2].price;
                     assignValuesToEntry(currencyData);
                 }
+                console.log(queryData.coinranking);
+                2
+
             }
         },
 

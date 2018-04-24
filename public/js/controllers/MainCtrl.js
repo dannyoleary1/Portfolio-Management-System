@@ -209,11 +209,11 @@ angular.module('MainCtrl', []).controller('MainController', function($scope,$q, 
             MainUtil.setUpData(entry, $scope.testInfo, $scope.currentCase);
             i++
             $scope.purchasePriceTotal += parseFloat(entry.cost);
-            $scope.totalSellPrice += entry.sellCosts;
+            $scope.totalSellPrice += eval(parseFloat(entry.sellCosts).toFixed(2));
             $scope.totalCurrentValue += parseFloat(entry.value);
         })
         $scope.currentValueAfterSellPrice = parseFloat($scope.totalCurrentValue) - parseFloat($scope.totalSellPrice);
-        $scope.netProfit = parseFloat($scope.currentValueAfterSellPrice) - parseFloat($scope.purchasePriceTotal);
+        $scope.netProfit = (parseFloat($scope.currentValueAfterSellPrice) - parseFloat($scope.purchasePriceTotal)).toFixed(2);
     });
 
     $scope.updateTableData = function () {
@@ -260,12 +260,12 @@ angular.module('MainCtrl', []).controller('MainController', function($scope,$q, 
                 }
                 MainUtil.setUpData(entry, $scope.testInfo, $scope.currentCase);
                 $scope.purchasePriceTotal += parseFloat(entry.cost);
-                $scope.totalSellPrice += entry.sellCosts;
+                $scope.totalSellPrice += eval(parseFloat(entry.sellCosts).toFixed(2));
                 $scope.totalCurrentValue += parseFloat(entry.value);
                 i++;
             })
             $scope.currentValueAfterSellPrice = parseFloat($scope.totalCurrentValue) - parseFloat($scope.totalSellPrice);
-            $scope.netProfit = parseFloat($scope.currentValueAfterSellPrice) - parseFloat($scope.purchasePriceTotal);
+            $scope.netProfit = (parseFloat($scope.currentValueAfterSellPrice) - parseFloat($scope.purchasePriceTotal)).toFixed(2);
         });
     }
     
