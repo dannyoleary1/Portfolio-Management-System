@@ -1,6 +1,4 @@
 // app/routes.js
-
-// grab the nerd model we just created
 var Stock = require('./models/stock');
 var transactionHistory = require('./models/transactionHistory');
 

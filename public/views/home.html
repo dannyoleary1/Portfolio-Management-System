@@ -64,6 +64,9 @@
                     <div class="col">
                         <button ng-click="whatIfStateOne()" type="button" class="btn btn-success">Sell All Once</button>
                     </div>
+                    <div class="col">
+                        <button ng-click="whatIfStateTwo()" type="button" class="btn btn-success">Sell All With Profit</button>
+                    </div>
                 </div>
                 </div>
                 <div ng-if="whatIfState == 1">
@@ -74,13 +77,34 @@
                         </div>
                         <br>
                         <div class="row -align-center">
-                            <b>Total Profit: </b> <div class="text-danger" ng-if="value.totalWhatIfStateOne < 0"> {{totalWhatIfStateOne}}</div> <div class="text-success" ng-if="totalWhatIfStateOne > 0"> {{totalWhatIfStateOne}} </div>
+                            <b>Total Profit: </b> <div class="text-danger" ng-if="totalWhatIfStateOne < 0"> {{totalWhatIfStateOne}}</div> <div class="text-success" ng-if="totalWhatIfStateOne > 0"> {{totalWhatIfStateOne}} </div>
                         </div>
+                </div>
+                <div ng-if="whatIfState == 2">
+                    <div ng-repeat="(key,value) in holdingArrayState2">
+                        <div class="row">
+                            Profit for {{key}}: {{value}}
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row -align-center">
+                        <b>Total Profit: </b> <div class="text-danger" ng-if="totalWhatIfStateOTwo < 0"> {{totalWhatIfStateTwo}}</div> <div class="text-success" ng-if="totalWhatIfStateTwo > 0"> {{totalWhatIfStateTwo}} </div>
+                    </div>
                 </div>
             </div>
             <div class="modal-footer">
+                <div ng-if="whatIfState== 1">
                 <button ng-click="resetState()" type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+                <div ng-if="whatIfState == 2">
+                    <button ng-click="resetStateTwo()" type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+                <div ng-if="whatIfState== 1">
                 <button ng-click="sellAll()" type="button" class="btn btn-success" data-dismiss="modal">Sell</button>
+                </div>
+                <div ng-if="whatIfState == 2">
+                    <button ng-click="sellWhatIfTwo()" type="button" class="btn btn-success" data-dismiss="modal">Sell Profit</button>
+                </div>
             </div>
         </div>
     </div>
