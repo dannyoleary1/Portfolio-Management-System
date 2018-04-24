@@ -5,7 +5,7 @@ angular.module('MainCtrl', []).controller('MainController', function($scope,$q, 
     $scope.description = "";
     $scope.quantity = 0;
     $scope.price = 0;
-    $scope.uid = 17;
+    var uid = 17;
     $scope.descriptionSelectBox = {
         stock1 : "AIB",
         stock2 : "Bank Of Ireland",
@@ -270,14 +270,16 @@ angular.module('MainCtrl', []).controller('MainController', function($scope,$q, 
     }
     
     $scope.addEntry = function () {
-        $scope.uid +=1;
-        var ise = ["AIB", "Bank of Ireland", "CRH"];
+        uid +=1;
+        var ise = ["AIB", "Bank Of Ireland", "CRH"];
         var currentTime = new Date().toLocaleDateString();
+        var cost = ($scope.quantity*$scope.price);
+        var body = "N/A"
         if (ise.includes($scope.description)){
+            console.log("IN HERE!")
             //TODO get date.
-            var cost = ($scope.quantity*$scope.price);
             if ($scope.description == "AIB") {
-                var body = {
+                body = {
                     "description": "AIB",
                     "location": "ise",
                     "symbol": "AIBG_I",
@@ -291,15 +293,16 @@ angular.module('MainCtrl', []).controller('MainController', function($scope,$q, 
                     "gainOrLost": 0.00,
                     "percentGainOrlost": 0.00,
                     "sellCosts": 0.00,
-                    "_id": $scope.uid
+                    "_id": uid
                 }
             }
-            else if ($scope.description == "Bank of Ireland"){
-                var body = {
-                    "description": "Bank of Ireland",
+            else if ($scope.description == "Bank Of Ireland"){
+                console.log("inside")
+                body = {
+                    "description": "Bank Of Ireland",
                     "location": "ise",
                     "symbol": "BIRG_I",
-                    "dateIn": "01/01/2018",
+                    "dateIn": currentTime,
                     "quantity": $scope.quantity,
                     "cost": cost,
                     "dateOut": "",
@@ -309,15 +312,15 @@ angular.module('MainCtrl', []).controller('MainController', function($scope,$q, 
                     "gainOrLost": 0.00,
                     "percentGainOrlost": 0.00,
                     "sellCosts": 0.00,
-                    "_id":$scope.uid
+                    "_id":uid
                 }
             }
             else {
-                var body = {
+                body = {
                     "description": "CRH",
                     "location": "ise",
                     "symbol": "CRH_I",
-                    "dateIn": "01/01/2014",
+                    "dateIn": currentTime,
                     "quantity": $scope.quantity,
                     "cost": cost,
                     "dateOut": "",
@@ -327,16 +330,16 @@ angular.module('MainCtrl', []).controller('MainController', function($scope,$q, 
                     "gainOrLost": 0.00,
                     "percentGainOrLost": 0.00,
                     "sellCosts": 0.00,
-                    "_id":$scope.uid
+                    "_id":uid
                 }
             }
         }
         else if ($scope.description == "Tesco"){
-            var body = {
+             body = {
                 "description": "Tesco",
                 "location": "ftse",
                 "symbol": "TSCO",
-                "dateIn": "01/01/2014",
+                "dateIn": currentTime,
                 "quantity": $scope.quantity,
                 "cost": cost,
                 "dateOut": "",
@@ -346,15 +349,15 @@ angular.module('MainCtrl', []).controller('MainController', function($scope,$q, 
                 "gainOrLost": 0.00,
                 "percentGainOrlLst": 0.00,
                 "sellCosts": 0.00,
-                "_id":$scope.uid
+                "_id":uid
             }
         }
         else{
-            var body = {
+             body = {
                 "description": "Ripple",
                 "location": "coinranking",
                 "symbol": "ripple-xrp",
-                "dateIn": "01/01/2016",
+                "dateIn": currentTime,
                 "quantity": $scope.quantity,
                 "cost": cost,
                 "dateOut": "",
@@ -364,12 +367,14 @@ angular.module('MainCtrl', []).controller('MainController', function($scope,$q, 
                 "gainOrLost": 0.00,
                 "percentGainOrLost": 0.00,
                 "sellCosts": 0.00,
-                "_id":$scope.uid
+                "_id":uid
             }
         }
-        REST.create("api/stocks", body).then(function (data){
-            $scope.updateTableData()
-        })
+        if (body != "N/A") {
+            REST.create("api/stocks", body).then(function (data) {
+                $scope.updateTableData()
+            })
+        }
     };
 
     $scope.resetData = function () {
@@ -384,6 +389,7 @@ angular.module('MainCtrl', []).controller('MainController', function($scope,$q, 
             $scope.updateTableData();
             $scope.whatIfState = 0;
             $scope.totalWhatIfStateOne = 0;
+            uid = 17;
         });
     };
 

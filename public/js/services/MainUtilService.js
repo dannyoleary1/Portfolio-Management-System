@@ -89,8 +89,6 @@ angular.module('MainUtilService', []).factory('MainUtil', function() {
                     currencyData.price = queryData.coinranking.data[2].price;
                     assignValuesToEntry(currencyData);
                 }
-                console.log(queryData.coinranking);
-                2
 
             }
         },
@@ -100,8 +98,6 @@ angular.module('MainUtilService', []).factory('MainUtil', function() {
         },
 
         sellingStock: function (cost, value, information, total) {
-            console.log(information)
-
             var tax = getSellCostValue(value);
             var profitOrLoss = (value-tax)-cost;
             var body = {

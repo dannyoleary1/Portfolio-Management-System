@@ -109,6 +109,7 @@ module.exports = function(app) {
         stock.sellCosts = req.body.sellCosts;
         stock._id = req.body._id;
 
+        console.log(stock)
         stock.save(function (err) {
             if (err)
                 res.send(err);
