@@ -29,7 +29,7 @@ angular.module('MainUtilService', []).factory('MainUtil', function() {
         currencyData.percentGainOrLost = Math.round((currencyData.gainOrLost/currencyData.cost)*100)+"%"
     }
     return{
-        setUpData : function (currencyData, queryData) {
+        setUpData : function (currencyData, queryData, currentCase) {
             currencyData.cost = (currencyData.cost).toFixed(2);
             if (currencyData.purchasePrice == 0) {
                 currencyData.purchasePrice = getPurchasePrice(currencyData)
@@ -38,25 +38,57 @@ angular.module('MainUtilService', []).factory('MainUtil', function() {
                 //step one. Get purchase price.
 
                 if (currencyData.symbol == 'AIBG_I'){
-                    currencyData.price = queryData.ise.data[0].price
-                    assignValuesToEntry(currencyData)
+                    if (currentCase != "live")
+                    {
+                        currencyData.price = queryData.ise.data[0].price
+                        assignValuesToEntry(currencyData)
+                    }
+                    else{
+                        currencyData.price = queryData.ise.data[1].price //TODO this should be more dynamic really
+                        assignValuesToEntry(currencyData)
+                    }
                 }
                 else if (currencyData.symbol == 'BIRG_I'){
-                    currencyData.price = queryData.ise.data[1].price
-                    assignValuesToEntry(currencyData)
+                    if (currentCase != "live") {
+                        currencyData.price = queryData.ise.data[1].price;
+                        assignValuesToEntry(currencyData);
+                    }
+                    else{
+                        currencyData.price = queryData.ise.data[6].price;
+                        assignValuesToEntry(currencyData);
+                    }
                 }
                 else{
-                    currencyData.price = queryData.ise.data[2].price
-                    assignValuesToEntry(currencyData)
+                    if (currentCase != "live") {
+                        currencyData.price = queryData.ise.data[2].price;
+                        assignValuesToEntry(currencyData);
+                    }
+                    else{
+                        currencyData.price = queryData.ise.data[10].price;
+                        assignValuesToEntry(currencyData);
+                    }
                 }
             }
             else if (currencyData.location == 'ftse'){
-                currencyData.price = queryData.ftse350.data[0].price
-                assignValuesToEntry(currencyData)
+                if (currentCase != "live"){
+                    currencyData.price = queryData.ftse350.data[0].price;
+                    assignValuesToEntry(currencyData)
+                }
+                else{
+                    currencyData.price = queryData.ftse350.data[320].price;
+                    assignValuesToEntry(currencyData)
+                }
+
             }
             else if (currencyData.location == 'coinranking'){
-                currencyData.price = queryData.coinranking.data[0].price
-                assignValuesToEntry(currencyData)
+                if (currentCase != "live"){
+                    currencyData.price = queryData.coinranking.data[0].price
+                    assignValuesToEntry(currencyData)
+                }
+                else{
+                    currencyData.price = queryData.coinranking.data[2].price;
+                    assignValuesToEntry(currencyData);
+                }
             }
         },
 

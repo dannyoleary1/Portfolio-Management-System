@@ -1,5 +1,6 @@
-angular.module('MainCtrl', []).controller('MainController', function($scope,$q, JSONModel, REST, MainUtil) {
-    $scope.testCase = [0,1,2,3,4,5];
+angular.module('MainCtrl', []).controller('MainController', function($scope,$q, JSONModel, REST, MainUtil, Selling) {
+
+    $scope.testCase = [0,1,2,3,4,5, 'live'];
     $scope.currentCase = 0;
     $scope.description = "";
     $scope.quantity = 0;
@@ -24,10 +25,13 @@ angular.module('MainCtrl', []).controller('MainController', function($scope,$q, 
     $scope.totalWhatIfStateTwo = 0;
     $scope.holdingArrayState2 = {};
 
+    //Set the state back to 0 on reset
     $scope.resetState = function () {
       $scope.whatIfState = 0;
       $scope.totalWhatIfStateOne = 0;
     };
+
+    //Set the state back to 0 on reset.
     $scope.resetStateTwo = function() {
         $scope.whatIfState = 0;
         $scope.totalWhatIfStateTwo = 0;
@@ -37,8 +41,8 @@ angular.module('MainCtrl', []).controller('MainController', function($scope,$q, 
     $scope.sellWhatIfTwo = function () {
         $scope.allStocks.forEach(function (entry) {
             var throwaway = ""
-            throwaway = ($scope.holdingArrayState2[entry.description] != undefined) ? REST.deleteOne('/api/stocks', entry._id) : "N/A";
-
+            throwaway = ($scope.holdingArrayState2[entry.description] != undefined) ?
+                REST.deleteOne('/api/stocks', entry._id) : "N/A";
         })
         $scope.sellAllTwo();
     }
@@ -46,26 +50,7 @@ angular.module('MainCtrl', []).controller('MainController', function($scope,$q, 
     //pretty hacky
     $scope.sellAll = function () {
         //AIB
-        var body = "";
-        var body = ($scope.holdingArray.AIB != undefined) ? {"description": "AIB", "profitOrLoss":$scope.holdingArray.AIB} : "N/A";
-        (body != "N/A") ? REST.create("/api/transactionHistory", body) : "N/A";
-        //BOI
-        var body = "";
-        var body = ($scope.holdingArray["Bank Of Ireland"] != undefined) ? {"description": "Bank Of Ireland", "profitOrLoss":$scope.holdingArray["Bank Of Ireland"]} : "N/A";
-        (body != "N/A") ? REST.create("/api/transactionHistory", body) : "N/A";
-        //CRH
-        var body = "";
-        var body = ($scope.holdingArray["CRH"] != undefined) ? {"description": "CRH", "profitOrLoss":$scope.holdingArray["CRH"]} : "N/A";
-        (body != "N/A") ? REST.create("/api/transactionHistory", body) : "N/A";
-        //Ripple
-        var body = "";
-        var body = ($scope.holdingArray["Ripple"] != undefined) ? {"description": "Ripple", "profitOrLoss":$scope.holdingArray["Ripple"]} : "N/A";
-        (body != "N/A") ? REST.create("/api/transactionHistory", body) : "N/A";
-        //Tesco
-        var body = "";
-        var body = ($scope.holdingArray["Tesco"] != undefined) ? {"description": "Tesco", "profitOrLoss": $scope.holdingArray["Tesco"]} : "N/A";
-        (body != "N/A") ? REST.create("api/transactionHistory", body) : "N/A";
-
+        Selling.sellAllWhatIfStateOne($scope.holdingArray);
         REST.delete('/api/stocks');
         $scope.updateTableData();
     };
@@ -73,32 +58,8 @@ angular.module('MainCtrl', []).controller('MainController', function($scope,$q, 
     //pretty hacky
     $scope.sellAllTwo = function () {
         //AIB
-        var body = "";
-        var body = ($scope.holdingArrayState2.AIB != undefined) ? {"description": "AIB", "profitOrLoss":$scope.holdingArrayState2.AIB} : "N/A";
-        (body != "N/A") ? REST.create("/api/transactionHistory", body) : "N/A";
-        (body != "N/A") ? delete $scope.holdingArrayState2["AIB"] : "N/A";
-        //BOI
-        var body = "";
-        var body = ($scope.holdingArrayState2["Bank Of Ireland"] != undefined) ? {"description": "Bank Of Ireland", "profitOrLoss":$scope.holdingArrayState2["Bank Of Ireland"]} : "N/A";
-        (body != "N/A") ? REST.create("/api/transactionHistory", body) : "N/A";
-        (body != "N/A") ? delete $scope.holdingArrayState2["Banke Of Ireland"] : "N/A";
-        //CRH
-        var body = "";
-        var body = ($scope.holdingArrayState2["CRH"] != undefined) ? {"description": "CRH", "profitOrLoss":$scope.holdingArrayState2["CRH"]} : "N/A";
-        (body != "N/A") ? REST.create("/api/transactionHistory", body) : "N/A";
-        (body != "N/A") ? delete $scope.holdingArrayState2["CRH"] : "N/A";
-        //Ripple
-        var body = "";
-        var body = ($scope.holdingArrayState2["Ripple"] != undefined) ? {"description": "Ripple", "profitOrLoss":$scope.holdingArrayState2["Ripple"]} : "N/A";
-        (body != "N/A") ? REST.create("/api/transactionHistory", body) : "N/A";
-        (body != "N/A") ? delete $scope.holdingArrayState2["Ripple"] : "N/A";
-        //Tesco
-        var body = "";
-        var body = ($scope.holdingArrayState2["Tesco"] != undefined) ? {"description": "Tesco", "profitOrLoss": $scope.holdingArrayState2["Tesco"]} : "N/A";
-        (body != "N/A") ? REST.create("api/transactionHistory", body) : "N/A";
-        (body != "N/A") ? delete $scope.holdingArrayState2["Tesco"] : "N/A";
-
-         $scope.updateTableData();
+        Selling.sellAllWhatIfStateTwo($scope.holdingArrayState2)
+        $scope.updateTableData();
     };
 
     $scope.whatIfStateOne = function () {
@@ -129,10 +90,7 @@ angular.module('MainCtrl', []).controller('MainController', function($scope,$q, 
                     totalCost += parseFloat(prevEntry.cost);
                     totalValue += parseFloat(prevEntry.value);
                     //Calculate sale cost here
-
                     var sell = MainUtil.sellingStock(totalCost, totalValue, entry, 0);
-
-
                     $scope.holdingArray[prevEntry.description] = sell.profitOrLoss;
                     $scope.totalWhatIfStateOne += sell.profitOrLoss;
                     totalCost = 0;
@@ -200,12 +158,24 @@ angular.module('MainCtrl', []).controller('MainController', function($scope,$q, 
         $scope.whatIfState = 2;
     };
 
-    $q.all([
+
+    function getUrl(currentCase){
+        console.log("in here");
+        if (currentCase == "live"){
+            return "https://scraper601.herokuapp.com/scrape/all";
+        }
+        else{
+            return "https://scraper601.herokuapp.com/scrape/test?n="+currentCase
+        }
+    }
+    $q.all(
+        [
         REST.get('/api/stocks'),
-        REST.get('https://scraper601.herokuapp.com/scrape/test?n='+$scope.currentCase)
+        REST.get(getUrl($scope.currentCase))
     ]).then(function(data) {
         $scope.allStocks = data[0];
         $scope.testInfo = data[1];
+
         $scope.allStocks.sort(function(a,b){
             return cmp(a.description.toLowerCase(), b.description.toLowerCase()) || cmp(a.dateIn, b.dateIn)
             }
@@ -236,7 +206,7 @@ angular.module('MainCtrl', []).controller('MainController', function($scope,$q, 
                 prevDes = entry.description;
                 prevEntry = entry;
             }
-            MainUtil.setUpData(entry, $scope.testInfo);
+            MainUtil.setUpData(entry, $scope.testInfo, $scope.currentCase);
             i++
             $scope.purchasePriceTotal += parseFloat(entry.cost);
             $scope.totalSellPrice += entry.sellCosts;
@@ -249,10 +219,11 @@ angular.module('MainCtrl', []).controller('MainController', function($scope,$q, 
     $scope.updateTableData = function () {
         $q.all([
             REST.get('/api/stocks'),
-            REST.get('https://scraper601.herokuapp.com/scrape/test?n='+$scope.currentCase)
+            REST.get(getUrl($scope.currentCase))
         ]).then(function(data) {
             $scope.allStocks = data[0];
             $scope.testInfo = data[1];
+            console.log($scope.testInfo);
             $scope.purchasePriceTotal = 0;
             $scope.totalSellPrice = 0;
             $scope.totalCurrentValue = 0;
@@ -287,7 +258,7 @@ angular.module('MainCtrl', []).controller('MainController', function($scope,$q, 
                     prevDes = entry.description;
                     prevEntry = entry;
                 }
-                MainUtil.setUpData(entry, $scope.testInfo);
+                MainUtil.setUpData(entry, $scope.testInfo, $scope.currentCase);
                 $scope.purchasePriceTotal += parseFloat(entry.cost);
                 $scope.totalSellPrice += entry.sellCosts;
                 $scope.totalCurrentValue += parseFloat(entry.value);
