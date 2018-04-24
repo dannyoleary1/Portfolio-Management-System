@@ -67,13 +67,20 @@
                 </div>
                 </div>
                 <div ng-if="whatIfState == 1">
-                    <div class="row">
-                        test
-                    </div>
+                        <div ng-repeat="(key,value) in holdingArray">
+                            <div class="row -align-center">
+                                Profit for {{key}}: {{value}}
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row -align-center">
+                            <b>Total Profit: </b> <div class="text-danger" ng-if="value.totalWhatIfStateOne < 0"> {{totalWhatIfStateOne}}</div> <div class="text-success" ng-if="totalWhatIfStateOne > 0"> {{totalWhatIfStateOne}} </div>
+                        </div>
                 </div>
             </div>
             <div class="modal-footer">
                 <button ng-click="resetState()" type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                <button ng-click="sellAll()" type="button" class="btn btn-success" data-dismiss="modal">Sell</button>
             </div>
         </div>
     </div>
@@ -137,7 +144,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr dir-paginate="value in allStocks|filter:search|itemsPerPage:10">
+        <tr dir-paginate="value in allStocks|filter:search|itemsPerPage:15">
             <td>{{value.description}}</td>
             <td>{{value.location}}</td>
             <td>{{value.symbol}}</td>

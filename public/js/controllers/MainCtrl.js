@@ -19,13 +19,51 @@ angular.module('MainCtrl', []).controller('MainController', function($scope,$q, 
     $scope.soldStockProfit = 0;
     $scope.profitOrLoss = 0;
     $scope.whatIfState = 0;
+    $scope.holdingArray = {};
+    $scope.totalWhatIfStateOne = 0;
+
 
     $scope.resetState = function () {
       $scope.whatIfState = 0;
+      $scope.totalWhatIfStateOne = 0;
     };
+
+
+    //pretty hacky
+    $scope.sellAll = function () {
+
+        console.log($scope.holdingArray)
+        //AIB
+        var body = "";
+        var body = ($scope.holdingArray.AIB != undefined) ? {"description": "AIB", "profitOrLoss":$scope.holdingArray.AIB} : "N/A";
+        (body != "N/A") ? REST.create("/api/transactionHistory", body) : "N/A";
+
+        //BOI
+        var body = "";
+        var body = ($scope.holdingArray["Bank Of Ireland"] != undefined) ? {"description": "Bank Of Ireland", "profitOrLoss":$scope.holdingArray["Bank Of Ireland"]} : "N/A";
+        (body != "N/A") ? REST.create("/api/transactionHistory", body) : "N/A";
+
+        //CRH
+        var body = "";
+        var body = ($scope.holdingArray["CRH"] != undefined) ? {"description": "CRH", "profitOrLoss":$scope.holdingArray["CRH"]} : "N/A";
+        (body != "N/A") ? REST.create("/api/transactionHistory", body) : "N/A";
+
+        //Ripple
+        var body = "";
+        var body = ($scope.holdingArray["Ripple"] != undefined) ? {"description": "Ripple", "profitOrLoss":$scope.holdingArray["Ripple"]} : "N/A";
+        (body != "N/A") ? REST.create("/api/transactionHistory", body) : "N/A";
+
+        //Tesco
+        var body = "";
+        var body = ($scope.holdingArray["Tesco"] != undefined) ? {"description": "Tesco", "profitOrLoss": $scope.holdingArray["Tesco"]} : "N/A";
+        (body != "N/A") ? REST.create("api/transactionHistory", body) : "N/A";
+
+         REST.delete('/api/stocks');
+         $scope.updateTableData();
+    };
+
     $scope.whatIfStateOne = function () {
         //calculate all the profits/loss per stock basis
-        var holdingArray = {};
         var prevEntry;
         var totalCost = 0;
         var totalValue = 0;
@@ -35,20 +73,29 @@ angular.module('MainCtrl', []).controller('MainController', function($scope,$q, 
 
             if (prevEntry != undefined) {
                 if (entry.description == prevEntry.description) {
-                    console.log(entry.value);
                     totalCost += parseFloat(prevEntry.cost);
                     totalValue += parseFloat(prevEntry.value);
                     prevEntry = entry;
                     if (i==$scope.allStocks.length-1){
                         totalCost += parseFloat(entry.cost);
                         totalValue += parseFloat(entry.value);
-                        holdingArray[entry.description] = totalValue;
+                        var sell = MainUtil.sellingStock(totalCost, totalValue, entry, 0);
+
+                        //Calculate sale cost here
+                        $scope.holdingArray[entry.description] = sell.profitOrLoss;
+                        $scope.totalWhatIfStateOne += sell.profitOrLoss;
                     }
                 }
                 else {
                     totalCost += parseFloat(prevEntry.cost);
                     totalValue += parseFloat(prevEntry.value);
-                    holdingArray[prevEntry.description] = totalValue;
+                    //Calculate sale cost here
+
+                    var sell = MainUtil.sellingStock(totalCost, totalValue, entry, 0);
+
+
+                    $scope.holdingArray[prevEntry.description] = sell.profitOrLoss;
+                    $scope.totalWhatIfStateOne += sell.profitOrLoss;
                     totalCost = 0;
                     totalValue = 0;
                     prevEntry = entry;
@@ -61,7 +108,6 @@ angular.module('MainCtrl', []).controller('MainController', function($scope,$q, 
         });
 
         $scope.whatIfState = 1;
-        console.log(holdingArray)
     }
     $q.all([
         REST.get('/api/stocks'),
@@ -273,6 +319,8 @@ angular.module('MainCtrl', []).controller('MainController', function($scope,$q, 
             REST.delete("api/transactionHistory")
         }).then(function (data) {
             $scope.updateTableData();
+            $scope.whatIfState = 0;
+            $scope.totalWhatIfStateOne = 0;
         });
     };
 
